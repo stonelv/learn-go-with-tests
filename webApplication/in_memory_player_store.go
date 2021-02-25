@@ -24,3 +24,12 @@ func (i *InMemoryPlayerStore) RecordWin(name string) {
 	defer i.mu.Unlock()
 	i.store[name]++
 }
+
+//GetLeague returns the Players info
+func (i *InMemoryPlayerStore) GetLeague() []Player {
+	var league []Player
+	for name, wins := range i.store {
+		league = append(league, Player{name, wins})
+	}
+	return league
+}
